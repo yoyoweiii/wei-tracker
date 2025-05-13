@@ -1,23 +1,33 @@
-import React from 'react';
-import { NavigationContainer } from '@react-navigation/native';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import NotionTokenScreen from './screens/NotionTokenScreen';
-import HomeScreen from './screens/HomeScreen';
-import AddTransactionScreen from './screens/AddTransactionScreen';
-import SummaryScreen from './screens/SummaryScreen';
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import HomeScreen from "./screens/HomeScreen";
+import RecordScreen from "./screens/AddTransactionScreen";
+import AssetsScreen from "./screens/SummaryScreen";
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 
-
-const Stack = createNativeStackNavigator();
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   return (
     <NavigationContainer>
-      <Stack.Navigator initialRouteName="Token">
-        <Stack.Screen name="Token" component={NotionTokenScreen} options={{ headerShown: false }} />
-        <Stack.Screen name="Home" component={HomeScreen} />
-        <Stack.Screen name="Add" component={AddTransactionScreen} />
-        <Stack.Screen name="Summary" component={SummaryScreen} />
-      </Stack.Navigator>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          tabBarIcon: ({ color, size }) => {
+            let iconName;
+            if (route.name === "Home") iconName = "home-outline";
+            if (route.name === "Record") iconName = "plus-circle-outline";
+            if (route.name === "Assets") iconName = "wallet-outline";
+
+            return <Icon name={iconName} size={size} color={color} />;
+          },
+          tabBarActiveTintColor: "#FF8A65",
+          tabBarInactiveTintColor: "gray",
+        })}
+      >
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Record" component={RecordScreen} />
+        <Tab.Screen name="Assets" component={AssetsScreen} />
+      </Tab.Navigator>
     </NavigationContainer>
   );
 }
