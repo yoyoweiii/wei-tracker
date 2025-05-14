@@ -1,11 +1,25 @@
-// screens/RecordScreen.tsx
 import React from 'react';
-import { View, Text } from 'react-native';
+import { View, Text, StyleSheet, Button } from 'react-native';
+import { pastelColors } from '../theme/colors';
 
-export default function RecordScreen() {
+export default function SettingsScreen() {
   return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Settings Page</Text>
+    <View style={styles.container}>
+      <Text style={styles.header}>Settings</Text>
+      <Button title="Update Notion Token" onPress={() => {}} />
     </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: pastelColors.background,
+    padding: 20,
+  },
+  header: {
+    fontSize: 22,
+    marginBottom: 20,
+    color: pastelColors.text,
+  },
+});
